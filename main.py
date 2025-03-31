@@ -43,6 +43,6 @@ if will_rain:
             msg = f"Subject: {subject}\r\n\r\n{body}"
 
             connection.sendmail(from_addr=MY_EMAIL, to_addrs=TO_EMAIL, msg=msg)
-        print(f"✅ Email sent successfully to {MY_EMAIL}")
+        print(f"✅ Email sent successfully to {TO_EMAIL}")
     except smtplib.SMTPException as e:
         print(f"❌ Failed to send email: {e}")
