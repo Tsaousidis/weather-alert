@@ -1,15 +1,20 @@
 
 import requests
 import smtplib
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Constants
 ENDPOINT = "https://api.openweathermap.org/data/2.5/forecast" 
-CITY = "Thessaloniki" # Change this to any city you want
+CITY = "Ptolemaida" # Change this to any city you want
 
 # Credentials
-API_KEY = "myapikey" # Change this with your API key from home.openweathermap.org
-MY_EMAIL = "myemail@email.com" # Change this with your email
-MY_PASSWORD = "mypassword" # Change this with your app password you've created in your email 
+API_KEY = os.getenv("API_KEY") # Change this with your API key from home.openweathermap.org
+MY_EMAIL = os.getenv("MY_EMAIL") # Change this with your email
+TO_EMAIL = os.getenv("TO_EMAIL")
+MY_PASSWORD = os.getenv("MY_PASSWORD") # Change this with your app password you've created in your email 
 
 # Parameters for API request
 parameters = {
@@ -37,7 +42,7 @@ if will_rain:
             body = "Remember to bring an umbrella!"
             msg = f"Subject: {subject}\r\n\r\n{body}"
 
-            connection.sendmail(from_addr=MY_EMAIL, to_addrs=MY_EMAIL, msg=msg)
+            connection.sendmail(from_addr=MY_EMAIL, to_addrs=TO_EMAIL, msg=msg)
         print(f"✅ Email sent successfully to {MY_EMAIL}")
     except smtplib.SMTPException as e:
         print(f"❌ Failed to send email: {e}")
